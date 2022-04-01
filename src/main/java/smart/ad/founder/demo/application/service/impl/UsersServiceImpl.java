@@ -39,11 +39,11 @@ public class UsersServiceImpl implements UsersService {
         User possibleCreatedUser = usersRepo.findById_2(user.getId());
         if(possibleCreatedUser == null){
             User usr = usersRepo.createNewUser(user);
-            System.out.println("IF_____________________" + usr.getUserEmail());
+            //System.out.println("IF_____________________" + usr.getUserEmail());
             return usr;
         }
         else {
-            System.out.println("ELSE______________________" + possibleCreatedUser.getUserEmail());
+            //System.out.println("ELSE______________________" + possibleCreatedUser.getUserEmail());
             return possibleCreatedUser;
         }
     }

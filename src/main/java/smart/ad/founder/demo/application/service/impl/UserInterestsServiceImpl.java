@@ -65,7 +65,7 @@ public class UserInterestsServiceImpl implements UserInterestsService {
         User theUser = usersRepo.findById(userId);
         newUserInterest.setUser(theUser);
 
-        System.out.println(newUserInterest.getId()+ " " + newUserInterest.isActive());
+        //System.out.println(newUserInterest.getId()+ " " + newUserInterest.isActive());
 
         // filter keywords
         Keywords restructuredKeywords = restructureKeywords(newUserInterest.getKeywords());
@@ -108,13 +108,15 @@ public class UserInterestsServiceImpl implements UserInterestsService {
     public Keywords restructureKeywords(Keywords keywords){
         String []keywordsArray = keywords.getMainKeyword().split(" ");
 
-        System.out.println(keywords.getMainKeyword());
-//        System.out.println(keywords.getOtherKeywords().get(0));
+        // System.out.println(keywords.getMainKeyword());
+        // System.out.println(keywords.getOtherKeywords());
 
         String mainKeyword = keywordsArray[0];
         List<String> otherKeywords = new ArrayList<>();
 
         otherKeywords.addAll(Arrays.asList(keywordsArray).subList(1, keywordsArray.length));
+
+
 
         return new Keywords(mainKeyword, otherKeywords);
     }

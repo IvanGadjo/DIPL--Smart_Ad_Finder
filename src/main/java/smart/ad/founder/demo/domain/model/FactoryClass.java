@@ -21,8 +21,8 @@ public class FactoryClass {
         return new User(userToken);
     }
 
-    public FoundAdvert createNewFoundAdvert(String url){
-        return new FoundAdvert(url);
+    public FoundAdvert createNewFoundAdvert(String url, boolean alreadyShownToUser, String imageUrl, String title, String price){
+        return new FoundAdvert(url, alreadyShownToUser, imageUrl, title, price);
     }
 
     public KafkaFoundAdMessage createNewKafkaFoundAdMessage(String adUrl, Long userInterestId){

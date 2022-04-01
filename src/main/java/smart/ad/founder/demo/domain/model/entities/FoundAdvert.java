@@ -30,17 +30,34 @@ public class FoundAdvert {
     // @Nullable
     private UserInterest userInterest;
 
+    @Column(name = "alreadyShownToUsers")
+    private Boolean alreadyShownToUser;
+
+    @Column(name = "imageUrls")
+    private String imageUrl;
+
+    @Column(name = "titles")
+    private String title;
+
+    @Column(name = "prices")
+    private String price;
+
     @SuppressWarnings("unused")
     public FoundAdvert() {
 
     }
 
-    public FoundAdvert(String url) {
+    public FoundAdvert(String url, boolean alreadyShownToUser, String imageUrl, String title, String price) {        // Dodaj gi u konstruktor novite props i segde kaj so se koristi konstruktorov smeni, pa update db
         this.url = url;
+        this.alreadyShownToUser = alreadyShownToUser;
+        this.imageUrl = imageUrl;
+        this.title = title;
+        this.price = price;
     }
 
     public void setUrl(String url) {
         this.url = url;
+
     }
 
     public void setUserInterest(UserInterest userInterest) {
