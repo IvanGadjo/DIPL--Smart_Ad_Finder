@@ -35,7 +35,9 @@ public class RestServicePazar3 {
         Document doc = Jsoup.connect(url).get();
 
         Elements adLinks =  doc.getElementsByClass("Link_vis");
-        List<String> foundAdvertsUrls = new ArrayList<>();
+//        List<String> foundAdvertsUrls = new ArrayList<>();
+
+        List<FoundAdvert> foundAds = new ArrayList<>();
 
         adLinks.forEach(el -> {
             // System.out.println(el.toString());
@@ -49,25 +51,32 @@ public class RestServicePazar3 {
             String adPrice = el.parent().nextElementSibling().text();
 
 
-
-
-            if(!adTitle.equals("")){        // Kako posleden element se fakja nekoj koj nema title - i potoa pagja na vadenje adImgUrl zatoa vaka mora
+            if(!adTitle.equals("")){        // * Kako posleden element se fakja nekoj koj nema title - i potoa pagja na vadenje adImgUrl zatoa vaka mora
 
                 String adImgUrl = el.parent().parent().parent().child(0).child(0).child(0).child(0).attr("data-src");
 
-                System.out.println(adUrl);
-                System.out.println(adTitle);
-                System.out.println(adPrice);
-                System.out.println(adImgUrl);
-                System.out.println("%%%%%%%%%%%%%%%%%%%");
+//                System.out.println(adUrl);
+//                System.out.println(adTitle);
+//                System.out.println(adPrice);
+//                System.out.println(adImgUrl);
+//                System.out.println("%%%%%%%%%%%%%%%%%%%");
 
-                // Ako nema pronajdeni rezultati so main keywordot vo niv - ne gi sejvnuva
+                // * Ako nema pronajdeni rezultati so main keywordot vo niv - ne gi sejvnuva
                 String capitalizedMain = userInterest.getKeywords().getMainKeyword().substring(0,1).toUpperCase() +
                         userInterest.getKeywords().getMainKeyword().substring(1);
 
                 if(!adUrl.equals("") && (adUrl.contains(userInterest.getKeywords().getMainKeyword())
-                        || adUrl.contains(capitalizedMain)))
-                    foundAdvertsUrls.add("https://www.pazar3.mk" + adUrl);
+                        || adUrl.contains(capitalizedMain))){
+
+                    FoundAdvert newFoundAd = factory.createNewFoundAdvert("https://www.pazar3.mk" + adUrl, false,
+                            adImgUrl, adTitle, adPrice);
+                    newFoundAd.setUserInterest(userInterest);
+
+                    foundAds.add(newFoundAd);
+
+                    // foundAdvertsUrls.add("https://www.pazar3.mk" + adUrl);
+
+                }
 
             }
 
@@ -81,8 +90,10 @@ public class RestServicePazar3 {
 //
 //        return foundAdverts;
 
-        List<FoundAdvert> l = new ArrayList<>();
-        return  l;
+//        List<FoundAdvert> l = new ArrayList<>();
+//        return  l;
+
+        return foundAds;
     }
 
 
