@@ -2,6 +2,7 @@ package smart.ad.founder.demo.application.service.rest;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 import smart.ad.founder.demo.domain.model.FactoryClass;
@@ -39,28 +40,49 @@ public class RestServicePazar3 {
         adLinks.forEach(el -> {
             // System.out.println(el.toString());
 
-            String secondPart = "";
+            String adUrl = "";
             if(el.parent().toString().startsWith("<h2>"))
-                secondPart = el.attr("href");
+                adUrl = el.attr("href");
 
             // System.out.println(el.parent());
-            // System.out.println(secondPart);
+            String adTitle = el.attr("title");
+            String adPrice = el.parent().nextElementSibling().text();
 
-            String capitalizedMain = userInterest.getKeywords().getMainKeyword().substring(0,1).toUpperCase() +
-                    userInterest.getKeywords().getMainKeyword().substring(1);
 
-            if(!secondPart.equals("") && (secondPart.contains(userInterest.getKeywords().getMainKeyword())
-                || secondPart.contains(capitalizedMain)))
-                foundAdvertsUrls.add("https://www.pazar3.mk" + secondPart);
+
+
+            if(!adTitle.equals("")){        // Kako posleden element se fakja nekoj koj nema title - i potoa pagja na vadenje adImgUrl zatoa vaka mora
+
+                String adImgUrl = el.parent().parent().parent().child(0).child(0).child(0).child(0).attr("data-src");
+
+                System.out.println(adUrl);
+                System.out.println(adTitle);
+                System.out.println(adPrice);
+                System.out.println(adImgUrl);
+                System.out.println("%%%%%%%%%%%%%%%%%%%");
+
+                // Ako nema pronajdeni rezultati so main keywordot vo niv - ne gi sejvnuva
+                String capitalizedMain = userInterest.getKeywords().getMainKeyword().substring(0,1).toUpperCase() +
+                        userInterest.getKeywords().getMainKeyword().substring(1);
+
+                if(!adUrl.equals("") && (adUrl.contains(userInterest.getKeywords().getMainKeyword())
+                        || adUrl.contains(capitalizedMain)))
+                    foundAdvertsUrls.add("https://www.pazar3.mk" + adUrl);
+
+            }
+
         });
 
 
 
-        List<FoundAdvert> foundAdverts = foundAdvertsUrls.stream().map(fau -> factory.createNewFoundAdvert(fau))
-                .collect(Collectors.toList());
-        foundAdverts.forEach(fa -> fa.setUserInterest(userInterest));
+//        List<FoundAdvert> foundAdverts = foundAdvertsUrls.stream().map(fau -> factory.createNewFoundAdvert(fau))
+//                .collect(Collectors.toList());
+//        foundAdverts.forEach(fa -> fa.setUserInterest(userInterest));
+//
+//        return foundAdverts;
 
-        return foundAdverts;
+        List<FoundAdvert> l = new ArrayList<>();
+        return  l;
     }
 
 

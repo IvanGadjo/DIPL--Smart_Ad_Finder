@@ -52,6 +52,7 @@ public class UserInterestsController {
         return userInterestsService.editUserInterest(newUserInterest,  userId);
     }
 
+    // Ako category ne e od default 5 categories, stavi "Other" (ne smee null)
     @PostMapping("/createUserInterest")
     public UserInterest createUserInterest(@RequestBody UserInterest userInterest,
                                            @RequestParam Long userId) throws Exception {
