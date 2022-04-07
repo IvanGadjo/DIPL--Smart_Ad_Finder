@@ -35,7 +35,6 @@ public class RestServicePazar3 {
         Document doc = Jsoup.connect(url).get();
 
         Elements adLinks =  doc.getElementsByClass("Link_vis");
-//        List<String> foundAdvertsUrls = new ArrayList<>();
 
         List<FoundAdvert> foundAds = new ArrayList<>();
 
@@ -74,24 +73,12 @@ public class RestServicePazar3 {
 
                     foundAds.add(newFoundAd);
 
-                    // foundAdvertsUrls.add("https://www.pazar3.mk" + adUrl);
 
                 }
 
             }
 
         });
-
-
-
-//        List<FoundAdvert> foundAdverts = foundAdvertsUrls.stream().map(fau -> factory.createNewFoundAdvert(fau))
-//                .collect(Collectors.toList());
-//        foundAdverts.forEach(fa -> fa.setUserInterest(userInterest));
-//
-//        return foundAdverts;
-
-//        List<FoundAdvert> l = new ArrayList<>();
-//        return  l;
 
         return foundAds;
     }

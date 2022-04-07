@@ -52,7 +52,7 @@ public class RestServicesScheduler {
                         foundAdvertService.createNewFoundAdvert(fa, fa.getUserInterest().getId());
                 });
 
-                System.out.println("DADA");
+                System.out.println("----- Found Ads Added");
 
             } catch (IOException e) {
                 e.printStackTrace();

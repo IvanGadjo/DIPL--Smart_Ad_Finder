@@ -4,6 +4,7 @@ package smart.ad.founder.demo.application.service.rest;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
@@ -37,19 +38,36 @@ public class RestServiceReklama5 {
 
 
         Elements adLinks = doc.getElementsByClass("SearchAdTitle");
-        List<String> foundAdvertsUrls = new ArrayList<>();
+
+        List<FoundAdvert> foundAds = new ArrayList<>();
+
+
+
         adLinks.forEach(el -> {
             // System.out.println(el.toString());
             String secondPart = el.toString().substring(9,30);
-            // String foundAdTitle = el.toString();   // Mozes i title da vadis za vo found ad so drug .substring()
+            String adTitle = el.text();
+            String adPrice = el.parent().nextElementSibling().nextElementSibling().nextElementSibling().child(0).child(0).text();
+            String adImgUrl = el.parent().parent().parent().child(0).child(0).child(0).attr("style");
 
-            foundAdvertsUrls.add("https://reklama5.mk" + secondPart);       // go vadi linkot
+            adImgUrl = adImgUrl.split("\\(")[1].substring(1);
+            adImgUrl = adImgUrl.substring(1, adImgUrl.length()-1);      // ! Mozebi ke treba https:// pred ova
+
+//            System.out.println(secondPart);
+//            System.out.println(adTitle);
+//            System.out.println(adPrice);
+//            System.out.println(adImgUrl);
+//            System.out.println("%%%%%%%%%%%%%%%%%%%");
+
+//            foundAdvertsUrls.add("https://reklama5.mk" + secondPart);       // go vadi linkot
+
+            FoundAdvert newFoundAd = factory.createNewFoundAdvert("https://reklama5.mk" + secondPart, false,
+                    adImgUrl, adTitle, adPrice);
+            newFoundAd.setUserInterest(userInterest);
+            foundAds.add(newFoundAd);
         });
 
-        List<FoundAdvert> foundAdverts = foundAdvertsUrls.stream().map(fau -> factory.createNewFoundAdvert(fau)).collect(Collectors.toList());
-        foundAdverts.stream().forEach(fa -> fa.setUserInterest(userInterest));
-
-        return foundAdverts;
+        return foundAds;
     }
 
 
