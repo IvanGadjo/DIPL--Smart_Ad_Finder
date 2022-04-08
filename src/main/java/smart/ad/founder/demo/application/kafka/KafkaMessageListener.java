@@ -18,8 +18,9 @@ public class KafkaMessageListener {
             groupId = "kafka-sandbox"
     )
     public void listen(KafkaFoundAdMessage message) {
-        System.out.println(" -------------------- SENDING VIA KAFKA LISTENER");
-         template.convertAndSend("/topic/group", message);   // convert the message and send it to the webSocket topic
+//        System.out.println(" -------------------- SENDING VIA KAFKA LISTENER");
+        System.out.println(" -------------------- LISTEN FOR KAFKA QUEUE, SEND MSG TO WEBSOCKET");
+        template.convertAndSend("/topic/group", message);   // convert the message and send it to the webSocket topic
 //        template.convertAndSend("/api/kafkaMessages/topic/group", message);
     }
 
