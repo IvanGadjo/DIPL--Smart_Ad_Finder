@@ -47,6 +47,7 @@ public class UsersRepo {
 //        old.setActiveInterests(newUser.getActiveInterests());
 //        old.setPastInterests(newUser.getPastInterests());
         old.setUserInterests(newUser.getUserInterests());
+        old.setUserAdverts(newUser.getUserAdverts());
 
         return userRepoJPA.save(old);
     }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import smart.ad.founder.demo.domain.model.DTOs.KafkaFoundAdMessage;
 import smart.ad.founder.demo.domain.model.entities.FoundAdvert;
 import smart.ad.founder.demo.domain.model.entities.User;
+import smart.ad.founder.demo.domain.model.entities.UserAdvert;
 import smart.ad.founder.demo.domain.model.entities.UserInterest;
 import smart.ad.founder.demo.domain.model.valueObjects.Keywords;
 import smart.ad.founder.demo.domain.model.valueObjects.TimeValObject;
@@ -27,5 +28,9 @@ public class FactoryClass {
 
     public KafkaFoundAdMessage createNewKafkaFoundAdMessage(String adUrl, Long userInterestId){
         return new KafkaFoundAdMessage(adUrl, userInterestId);
+    }
+
+    public UserAdvert createNewUserAdvert(String description, String title, String category, String region, String price, Boolean isActive, Byte[] image){
+        return new UserAdvert(description, title, category, region, price, isActive, image);
     }
 }

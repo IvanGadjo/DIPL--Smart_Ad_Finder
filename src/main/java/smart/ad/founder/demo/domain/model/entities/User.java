@@ -26,23 +26,15 @@ public class User {
     private String userEmail;
 
 
-    // FIXME: Ova pravi samo edna konekcija kaj db - kaj userInterest se cuva samo userId
-    // nema distinkcija pomegju dveve listi, pa zatoa koga se kreira userInterest go stava
-    // i vo dvete listi. Nie sega ke proveruvame spored active prop na userInterestot,
-    // ama ova treba da bide samo edna lista
-
-
-//    @Fetch(value = FetchMode.SUBSELECT)
-//    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-//    private List<UserInterest> activeInterests;
-//
-//    @Fetch(value = FetchMode.SUBSELECT)
-//    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-//    private List<UserInterest> pastInterests;
+    // * DB Connections
 
     @Fetch(value = FetchMode.SUBSELECT)
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<UserInterest> userInterests;
+
+    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<UserAdvert> userAdverts;
 
     @SuppressWarnings("unused")
     public User() {
@@ -51,24 +43,18 @@ public class User {
 
     public User(String userEmail) {
         this.userEmail = userEmail;
-//        activeInterests = new ArrayList<>();
-//        pastInterests = new ArrayList<>();
         userInterests = new ArrayList<>();
+        userAdverts = new ArrayList<>();
     }
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
     }
 
-//    public void setActiveInterests(List<UserInterest> activeInterests) {
-//        this.activeInterests = activeInterests;
-//    }
-//
-//    public void setPastInterests(List<UserInterest> pastInterests) {
-//        this.pastInterests = pastInterests;
-//    }
-
     public void setUserInterests(List<UserInterest> userInterests) {
         this.userInterests = userInterests;
+    }
+    public void setUserAdverts(List<UserAdvert> userAdverts) {
+        this.userAdverts = userAdverts;
     }
 }
