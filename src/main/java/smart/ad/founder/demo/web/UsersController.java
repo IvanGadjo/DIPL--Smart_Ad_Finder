@@ -29,6 +29,7 @@ public class UsersController {
         return usersService.findUserById(id);
     }
 
+    // ! Not tested: dodadov da se editira i user adverts listata
     @PatchMapping("/editUser")
     public User editUser(@RequestBody User newUser){
         return usersService.editUser(newUser);

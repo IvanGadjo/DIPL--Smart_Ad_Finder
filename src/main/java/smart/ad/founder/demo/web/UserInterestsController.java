@@ -52,7 +52,7 @@ public class UserInterestsController {
         return userInterestsService.editUserInterest(newUserInterest,  userId);
     }
 
-    // Ako category ne e od default 5 categories, stavi "Other" (ne smee null)
+    // * Ako category ne e od default 5 categories, stavi "Other" (ne smee null)
     @PostMapping("/createUserInterest")
     public UserInterest createUserInterest(@RequestBody UserInterest userInterest,
                                            @RequestParam Long userId) throws Exception {
@@ -69,14 +69,14 @@ public class UserInterestsController {
 
 
 
-    // TESTING REST SERVICE
+    // ? TESTING REST SERVICE
     @GetMapping("/test/reklama5")
     public List<FoundAdvert> testReklama5() throws Exception {
 
 
-        // TODO: Koga se prima od front keywords, ke mora sve sto e so prazni mesta da go podelis
-        // na main i other keywords. pr userot vnesol Dacia Sandero 45, ti tuka go delis na Dacia (mainKw),
-        // Sandero (prv otherKw) i 45 (vtor OtherKw)
+        // * Koga se prima od front keywords, ke mora sve sto e so prazni mesta da go podelis
+        // * na main i other keywords. pr userot vnesol Dacia Sandero 45, ti tuka go delis na Dacia (mainKw),
+        // * Sandero (prv otherKw) i 45 (vtor OtherKw)
 
         List<String> okwrds = new ArrayList<>();
         okwrds.add("sandero");
@@ -85,9 +85,6 @@ public class UserInterestsController {
         TimeValObject tvo = new TimeValObject(LocalDateTime.now(), LocalDateTime.of(2021,1,1,1,1));
         String category = "Avtomobili";
         String region = "Skopje";
-
-        // TODO: tuka ke treba na sekoj pola saat da se povikuva metodot od servisot, ili mozebi taa logika da e vo samiot servis,
-        // => metod sto ke se izvrsuva na 30 min i ke go povikuva vnatresniot metod sto prai http requests
 
         UserInterest userInterest = new UserInterest(keywords, tvo, category, region, true);
 
