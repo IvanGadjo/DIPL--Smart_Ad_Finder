@@ -47,13 +47,13 @@ public class UserAdvertsService implements UserAdvertService {
     }
 
     @Override
-    public UserAdvert editUserAdvert(UserAdvert newUserAdvert, Long userId) throws Exception {
+    public UserAdvert editUserAdvert(UserAdvert newUserAdvert, Long userAdvertId, Long userId) throws Exception {
         User theUser = usersRepo.findById(userId);
         newUserAdvert.setUser(theUser);
 
         //System.out.println(newUserInterest.getId()+ " " + newUserInterest.isActive());
 
-        UserAdvert savedUserAdvert = userAdvertsRepo.editUserAdvert(newUserAdvert);
+        UserAdvert savedUserAdvert = userAdvertsRepo.editUserAdvert(userAdvertId, newUserAdvert);
 
         return savedUserAdvert;
     }

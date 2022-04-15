@@ -25,8 +25,10 @@ public class UserAdvertsRepo {
         return userAdvertRepoJPA.findById(id).orElseThrow(RuntimeException::new);
     }
 
-    public UserAdvert editUserAdvert(UserAdvert newUserAdvert) {
-        UserAdvert old = userAdvertRepoJPA.findById(newUserAdvert.getId()).orElseThrow(RuntimeException::new);
+    public UserAdvert editUserAdvert(Long userAdvertId, UserAdvert newUserAdvert) {
+//        UserAdvert old = userAdvertRepoJPA.findById(newUserAdvert.getId()).orElseThrow(RuntimeException::new);
+
+        UserAdvert old = userAdvertRepoJPA.findById(userAdvertId).orElseThrow(RuntimeException::new);
 
         old.setCategory(newUserAdvert.getCategory());
         old.setUser(newUserAdvert.getUser());

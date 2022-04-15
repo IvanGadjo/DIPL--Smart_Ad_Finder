@@ -13,7 +13,7 @@ public interface UserAdvertService {
 
     UserAdvert findUserAdvertById(Long id);
 
-    UserAdvert editUserAdvert(UserAdvert newUserAdvert, Long userId) throws Exception;
+    UserAdvert editUserAdvert(UserAdvert newUserAdvert, Long userAdvertId, Long userId) throws Exception;
 
     UserAdvert addNewUserAdvert(UserAdvert userAdvert, Long userId) throws Exception;
 
