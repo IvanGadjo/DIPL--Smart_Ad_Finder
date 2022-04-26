@@ -4,7 +4,7 @@ package smart.ad.founder.demo.domain.model.DTOs;
 import lombok.Data;
 
 @Data
-public class KafkaFoundAdMessage {
+public class KafkaFoundAdMessage {      // * Cel ad da se prakja, isto taka i za koj user e da se prakja userID
 
     private String adUrl;
 

@@ -12,7 +12,7 @@ public class KafkaMessageListener {
     @Autowired
     SimpMessagingTemplate template;
 
-    // the method that will listen for the Kafka queue messages
+    // * the method that will listen for the Kafka queue messages
     @KafkaListener(
             topics = "kafka-smartAdFounder",
             groupId = "kafka-sandbox"

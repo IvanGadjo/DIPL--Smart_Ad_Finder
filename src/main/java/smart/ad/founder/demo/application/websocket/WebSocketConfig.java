@@ -15,7 +15,12 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         // chat client will use this to connect to the server
 //        registry.addEndpoint("/kafka-chat");
 //        registry.addEndpoint("/kafka-chat").setAllowedOrigins("*").withSockJS();
+
+
         registry.addEndpoint("/kafka-chat").setAllowedOriginPatterns("*").withSockJS();
+
+        //  * without sockjs
+//        registry.addEndpoint("/kafka-chat").setAllowedOriginPatterns("*");
     }
 
     @Override
