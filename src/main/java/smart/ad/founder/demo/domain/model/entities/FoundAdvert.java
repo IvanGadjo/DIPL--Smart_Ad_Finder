@@ -63,4 +63,8 @@ public class FoundAdvert {
     public void setUserInterest(UserInterest userInterest) {
         this.userInterest = userInterest;
     }
+
+    public void setAlreadyShownToUser(boolean alreadyShownToUser) {
+        this.alreadyShownToUser = alreadyShownToUser;
+    }
 }

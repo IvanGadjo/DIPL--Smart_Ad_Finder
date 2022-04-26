@@ -29,7 +29,7 @@ public class KafkaController {
     @PostMapping(value = "/send", consumes = "application/json", produces = "application/json")
     public void sendMessage(@RequestBody KafkaFoundAdMessage kafkaFoundAdMessage) {
 
-        kafkaFoundAdMessage.setAdUrl("testUrlAndrej.com");
+        kafkaFoundAdMessage.setUrl("testUrlAndrej.com");
         kafkaFoundAdMessage.setUserInterestId(123L);
 
         try {

@@ -12,6 +12,7 @@ import smart.ad.founder.demo.domain.model.DTOs.KafkaFoundAdMessage;
 public class WebsocketController {
 
 
+    // * Only for testing
 
     @MessageMapping("/hello")
     @SendTo("/topic/group")

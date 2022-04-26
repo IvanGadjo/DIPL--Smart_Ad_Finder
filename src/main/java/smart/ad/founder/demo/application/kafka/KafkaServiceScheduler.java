@@ -27,22 +27,32 @@ public class KafkaServiceScheduler {
         this.factory = factory;
     }
 
-    // TODO: Mozebi treba da oznacuvas site poraki koi vekje se prateni na kafka?
+
 
      @Scheduled(fixedDelay = 30000)      // ova e na 30 sekundi
     public void sendMessageToKafka(){
         List<KafkaFoundAdMessage> kafkaMessages = new ArrayList<>();
 
+         // * Gi zema site mozni found adverts sto se alreadyShownToUser = false
+         // * vadi user info od userInterestot
+         // * stavanje alreadyShownToUser = true vo KafkaMessageListener -> pred da se pratat do websocket
+
         foundAdvertService.findAllFoundAdverts().forEach(fa -> {
-            kafkaMessages.add(factory.createNewKafkaFoundAdMessage(fa.getUrl(), fa.getUserInterest().getId()));
+            // fa.getUserInterest().getUser().getUserEmail();
+            // fa.getUserInterest().getUser().getId();
+
+            if(!fa.getAlreadyShownToUser()) {
+                kafkaMessages.add(factory.createNewKafkaFoundAdMessage(fa.getId(), fa.getUrl(), fa.getImageUrl(), fa.getTitle(),
+                        fa.getPrice(), fa.getUserInterest().getId(), fa.getUserInterest().getUser().getUserEmail()));
+            }
         });
 
         System.out.println("----------------- Kafka message 30 secs ---------------");
 
         kafkaMessages.forEach(km -> {
             try {
-                //Sending the message to kafka topic queue
-                System.out.println("**********Send");
+                // * Sending the message to kafka topic queue
+                // System.out.println("**********Send");
                 kafkaTemplate.send("kafka-smartAdFounder", km).get();
             } catch (InterruptedException | ExecutionException e) {
                 throw new RuntimeException(e);
