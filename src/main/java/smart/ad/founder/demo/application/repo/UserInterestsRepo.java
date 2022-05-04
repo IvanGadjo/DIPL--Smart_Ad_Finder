@@ -46,4 +46,16 @@ public class UserInterestsRepo {
     public void deleteById(Long id) {
         userInterestRepoJPA.deleteById(id);
     }
+
+    public List<UserInterest> findAllByCategory(String category) {
+        return userInterestRepoJPA.findAllByCategory(category);
+    }
+
+    public List<UserInterest> findAllByRegion(String region) {
+        return userInterestRepoJPA.findAllByRegion(region);
+    }
+
+    public List<UserInterest> findAllByCategoryAndRegion(String category, String region) {
+        return userInterestRepoJPA.findAllByCategoryAndRegion(category, region);
+    }
 }

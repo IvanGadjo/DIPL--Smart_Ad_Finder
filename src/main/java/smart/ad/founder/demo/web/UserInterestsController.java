@@ -59,12 +59,28 @@ public class UserInterestsController {
         return userInterestsService.addNewUserInterest(userInterest, userId);
     }
 
-
-
-
     @DeleteMapping("/{id}")
     public void deleteUserInterest(@PathVariable("id") Long id) {
         userInterestsService.deleteUserInterestById(id);
+    }
+
+
+
+
+    @GetMapping("/all/byCategory")
+    public List<UserInterest> getUserInterestsByCategory(@RequestParam String category) {
+        return userInterestsService.findAllByCategory(category);
+    }
+
+    @GetMapping("/all/byRegion")
+    public List<UserInterest> getUserInterestsByRegion(@RequestParam String region) {
+        return userInterestsService.findAllByRegion(region);
+    }
+
+    @GetMapping("/all/byCategoryAndRegion")
+    public List<UserInterest> getUserInterestsByCategoryAndRegion(@RequestParam String category,
+                                                            @RequestParam String region) {
+        return userInterestsService.findAllByCategoryAndRegion(category, region);
     }
 
 

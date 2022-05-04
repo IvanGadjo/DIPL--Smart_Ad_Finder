@@ -105,6 +105,23 @@ public class UserInterestsServiceImpl implements UserInterestsService {
     }
 
 
+
+    @Override
+    public List<UserInterest> findAllByCategory(String category) {
+        return userInterestsRepo.findAllByCategory(category);
+    }
+
+    @Override
+    public List<UserInterest> findAllByRegion(String region) {
+        return userInterestsRepo.findAllByRegion(region);
+    }
+
+    @Override
+    public List<UserInterest> findAllByCategoryAndRegion(String category, String region) {
+        return userInterestsRepo.findAllByCategoryAndRegion(category, region);
+    }
+
+
     public Keywords restructureKeywords(Keywords keywords){
         String []keywordsArray = keywords.getMainKeyword().split(" ");
 

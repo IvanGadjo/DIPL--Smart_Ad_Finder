@@ -38,11 +38,12 @@ public class FoundAdvertsController {
     @PostMapping("/createFoundAdvert")
     public FoundAdvert createFoundAdvert(@RequestBody FoundAdvert user,
                                          @RequestParam Long userInterestId){
-        return foundAdvertService.createNewFoundAdvert(user, userInterestId);
+            return foundAdvertService.createNewFoundAdvert(user, userInterestId);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteFoundAdvert(@PathParam("id") Long id){
+    public void deleteFoundAdvert(@PathVariable("id") Long id){
+        System.out.println(id);
         foundAdvertService.deleteFoundAdvertById(id);
     }
 }

@@ -18,4 +18,12 @@ public interface UserInterestsService {
     UserInterest addNewUserInterest(UserInterest userInterest, Long userId) throws Exception;
 
     void deleteUserInterestById(Long id);
+
+
+
+    List<UserInterest> findAllByCategory(String category);
+
+    List<UserInterest> findAllByRegion(String region);
+
+    List<UserInterest> findAllByCategoryAndRegion(String category, String region);
 }
