@@ -21,9 +21,9 @@ public interface UserInterestsService {
 
 
 
-    List<UserInterest> findAllByCategory(String category);
+    List<UserInterest> findAllByCategory(String category, Long userId);
 
-    List<UserInterest> findAllByRegion(String region);
+    List<UserInterest> findAllByRegion(String region, Long userId);
 
-    List<UserInterest> findAllByCategoryAndRegion(String category, String region);
+    List<UserInterest> findAllByCategoryAndRegion(String category, String region, Long userId);
 }

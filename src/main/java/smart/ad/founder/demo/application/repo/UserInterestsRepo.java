@@ -47,15 +47,15 @@ public class UserInterestsRepo {
         userInterestRepoJPA.deleteById(id);
     }
 
-    public List<UserInterest> findAllByCategory(String category) {
-        return userInterestRepoJPA.findAllByCategory(category);
+    public List<UserInterest> findAllByCategory(String category, Long userId) {
+        return userInterestRepoJPA.findAllByCategory(category, userId);
     }
 
-    public List<UserInterest> findAllByRegion(String region) {
-        return userInterestRepoJPA.findAllByRegion(region);
+    public List<UserInterest> findAllByRegion(String region, Long userId) {
+        return userInterestRepoJPA.findAllByRegion(region, userId);
     }
 
-    public List<UserInterest> findAllByCategoryAndRegion(String category, String region) {
-        return userInterestRepoJPA.findAllByCategoryAndRegion(category, region);
+    public List<UserInterest> findAllByCategoryAndRegion(String category, String region, Long userId) {
+        return userInterestRepoJPA.findAllByCategoryAndRegion(category, region, userId);
     }
 }

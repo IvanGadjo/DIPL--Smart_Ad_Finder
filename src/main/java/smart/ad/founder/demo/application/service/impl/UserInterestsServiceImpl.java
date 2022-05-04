@@ -107,18 +107,18 @@ public class UserInterestsServiceImpl implements UserInterestsService {
 
 
     @Override
-    public List<UserInterest> findAllByCategory(String category) {
-        return userInterestsRepo.findAllByCategory(category);
+    public List<UserInterest> findAllByCategory(String category, Long userId) {
+        return userInterestsRepo.findAllByCategory(category, userId);
     }
 
     @Override
-    public List<UserInterest> findAllByRegion(String region) {
-        return userInterestsRepo.findAllByRegion(region);
+    public List<UserInterest> findAllByRegion(String region, Long userId) {
+        return userInterestsRepo.findAllByRegion(region, userId);
     }
 
     @Override
-    public List<UserInterest> findAllByCategoryAndRegion(String category, String region) {
-        return userInterestsRepo.findAllByCategoryAndRegion(category, region);
+    public List<UserInterest> findAllByCategoryAndRegion(String category, String region, Long userId) {
+        return userInterestsRepo.findAllByCategoryAndRegion(category, region, userId);
     }
 
 

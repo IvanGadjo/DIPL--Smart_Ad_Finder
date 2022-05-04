@@ -67,20 +67,23 @@ public class UserInterestsController {
 
 
 
-    @GetMapping("/all/byCategory")
-    public List<UserInterest> getUserInterestsByCategory(@RequestParam String category) {
-        return userInterestsService.findAllByCategory(category);
+    @GetMapping("/byCategory/byUser")
+    public List<UserInterest> getUserInterestsByCategory(@RequestParam String category,
+                                                         @RequestParam Long userId) {
+        return userInterestsService.findAllByCategory(category, userId);
     }
 
-    @GetMapping("/all/byRegion")
-    public List<UserInterest> getUserInterestsByRegion(@RequestParam String region) {
-        return userInterestsService.findAllByRegion(region);
+    @GetMapping("/byRegion/byUser")
+    public List<UserInterest> getUserInterestsByRegion(@RequestParam String region,
+                                                       @RequestParam Long userId) {
+        return userInterestsService.findAllByRegion(region, userId);
     }
 
-    @GetMapping("/all/byCategoryAndRegion")
+    @GetMapping("/byCategoryAndRegion/byUser")
     public List<UserInterest> getUserInterestsByCategoryAndRegion(@RequestParam String category,
-                                                            @RequestParam String region) {
-        return userInterestsService.findAllByCategoryAndRegion(category, region);
+                                                                  @RequestParam String region,
+                                                                  @RequestParam Long userId) {
+        return userInterestsService.findAllByCategoryAndRegion(category, region, userId);
     }
 
 
