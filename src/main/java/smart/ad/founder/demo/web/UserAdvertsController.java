@@ -1,6 +1,7 @@
 package smart.ad.founder.demo.web;
 
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.yaml.snakeyaml.util.ArrayUtils;
@@ -41,7 +42,7 @@ public class UserAdvertsController {
     }
 
     // ! TREBA DA E KAKO CREATE USER ADVERT - VIDI VO INTELIGENTA PROEKT
-    @PatchMapping("/editUserAdvert")
+    @PatchMapping(value = "/editUserAdvert", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public UserAdvert editUserAdvert(
             @RequestParam(value = "id", required = false) Long id,
             @RequestParam(value = "description", required = false) String description,
@@ -76,17 +77,8 @@ public class UserAdvertsController {
 
 
 
-
-
-//    @PostMapping("/createUserAdvert")
-//    public UserAdvert createUserAdvert(@RequestBody UserAdvert userInterest,
-//                                           @RequestParam Long userId) throws Exception {
-//        return userAdvertService.addNewUserAdvert(userInterest, userId);
-//    }
-
-
     // ! MOZEBI NE TREBA VAKA SLIKA SO BYTE ARRAY
-    @PostMapping("/createUserAdvert")
+    @PostMapping(value = "/createUserAdvert", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public UserAdvert createUserAdvert(
             @RequestParam(value = "description", required = false) String description,
             @RequestParam(value = "title", required = false) String title,
@@ -121,39 +113,10 @@ public class UserAdvertsController {
     }
 
 
-//    @PostMapping("/createUserAdvert")
-//    public UserAdvert createUserAdvert(
-//            @RequestParam(value = "description", required = false) String description,
-//            @RequestParam(value = "title", required = false) String title,
-//            @RequestParam(value = "category", required = false) String category,
-//            @RequestParam(value = "region", required = false) String region,
-//            @RequestParam(value = "price", required = false) String price,
-//            @RequestParam(value = "isActive", required = false) Boolean isActive,
-//
-//            @RequestParam(value = "image", required = false) MultipartFile image,
-//
-//            @RequestParam(value = "userId", required = false) Long userId) throws Exception {
-//
-//        byte[] imageBytes = null;
-//
-//
-//        if (image != null) {
-//            if (!image.getContentType().equals("image/png") || !image.getContentType().equals("image/jpeg") || !image.getContentType().equals("image/gif")) {
-//                throw new RuntimeException();      // ! Treba da e custom exception - file not in image format
-//            }
-//            imageBytes = image.getBytes();
-//        }
-//
-//        UserAdvert newUserAdvert = factory.createNewUserAdvert(description, title, category, region, price, isActive, imageBytes);
-//
-//        return userAdvertService.addNewUserAdvert(newUserAdvert, userId);
-//    }
-
-
-
-
-
-
+    @PatchMapping("/setIsActive")
+    public UserAdvert setisActive(@RequestBody UserAdvert newUserAdvert, @RequestParam Long userId) throws Exception {
+        return userAdvertService.editUserAdvert(newUserAdvert, newUserAdvert.getId(),  userId);
+    }
 
 
     @DeleteMapping("/{id}")

@@ -133,6 +133,11 @@ public class UserInterestsServiceImpl implements UserInterestsService {
 
         otherKeywords.addAll(Arrays.asList(keywordsArray).subList(1, keywordsArray.length));
 
+        // System.out.println(keywordsArray[0]);
+        // System.out.println(keywordsArray[1]);
+
+        // System.out.println(mainKeyword);
+        // System.out.println(otherKeywords);
 
 
         return new Keywords(mainKeyword, otherKeywords);
