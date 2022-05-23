@@ -30,7 +30,7 @@ public class FactoryClass {
         return new KafkaFoundAdMessage(foundAdId, url, imageUrl, title, price, userInterestId, userEmail);
     }
 
-    public UserAdvert createNewUserAdvert(String description, String title, String category, String region, String price, Boolean isActive, Byte[] image){
-        return new UserAdvert(description, title, category, region, price, isActive, image);
+    public UserAdvert createNewUserAdvert(String description, String title, String category, String region, String price, Boolean isActive, Byte[] image, String contactInfo){
+        return new UserAdvert(description, title, category, region, price, isActive, image, contactInfo);
     }
 }

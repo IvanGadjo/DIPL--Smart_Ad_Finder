@@ -51,6 +51,7 @@ public class UserAdvertsController {
             @RequestParam(value = "region", required = false) String region,
             @RequestParam(value = "price", required = false) String price,
             @RequestParam(value = "isActive", required = false) Boolean isActive,
+            @RequestParam(value = "contactInfo", required = false) String contactInfo,
 
             @RequestParam(value = "image", required = false) MultipartFile image,
 
@@ -70,7 +71,7 @@ public class UserAdvertsController {
         for(byte b: imageBytes)
             byteObjects[i++] = b;  // Autoboxing.
 
-        UserAdvert newUserAdvert = factory.createNewUserAdvert(description, title, category, region, price, isActive, byteObjects);
+        UserAdvert newUserAdvert = factory.createNewUserAdvert(description, title, category, region, price, isActive, byteObjects, contactInfo);
 
         return userAdvertService.editUserAdvert(newUserAdvert, id,  userId);
     }
@@ -86,6 +87,7 @@ public class UserAdvertsController {
             @RequestParam(value = "region", required = false) String region,
             @RequestParam(value = "price", required = false) String price,
             @RequestParam(value = "isActive", required = false) Boolean isActive,
+            @RequestParam(value = "contactInfo", required = false) String contactInfo,
 
             @RequestParam(value = "image", required = false) MultipartFile image,
 
@@ -107,7 +109,7 @@ public class UserAdvertsController {
 
 
 
-        UserAdvert newUserAdvert = factory.createNewUserAdvert(description, title, category, region, price, isActive, byteObjects);
+        UserAdvert newUserAdvert = factory.createNewUserAdvert(description, title, category, region, price, isActive, byteObjects, contactInfo);
 
         return userAdvertService.addNewUserAdvert(newUserAdvert, userId);
     }

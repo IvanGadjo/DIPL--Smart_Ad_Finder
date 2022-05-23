@@ -40,6 +40,9 @@ public class UserAdvert {
     @Column(name = "images")
     private Byte[] image;
 
+    @Column(name = "contactInfos")
+    private String contactInfo;
+
 
     // * DB Connections
 
@@ -54,7 +57,7 @@ public class UserAdvert {
     @SuppressWarnings("unused")
     public UserAdvert() {}
 
-    public UserAdvert(String description, String title, String category, String region, String price, Boolean isActive, Byte[] image) {
+    public UserAdvert(String description, String title, String category, String region, String price, Boolean isActive, Byte[] image, String contactInfo) {
         this.description = description;
         this.title = title;
         this.category = category;
@@ -62,6 +65,7 @@ public class UserAdvert {
         this.price = price;
         this.isActive = isActive;
         this.image = image;
+        this.contactInfo = contactInfo;
     }
 
     public void setId(Long id){
@@ -99,4 +103,9 @@ public class UserAdvert {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public void setContactInfo(String contactInfo) {
+        this.contactInfo = contactInfo;
+    }
+
 }

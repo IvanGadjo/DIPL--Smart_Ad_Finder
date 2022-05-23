@@ -38,6 +38,7 @@ public class UserAdvertsRepo {
         old.setIsActive(newUserAdvert.getIsActive());
         old.setPrice(newUserAdvert.getPrice());
         old.setTitle(newUserAdvert.getTitle());
+        old.setContactInfo(newUserAdvert.getContactInfo());
         return userAdvertRepoJPA.save(old);
     }
 
