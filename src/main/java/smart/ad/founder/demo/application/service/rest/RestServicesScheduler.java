@@ -35,21 +35,26 @@ public class RestServicesScheduler {
 
         System.out.println("----------------- Search for Ads 30 sec ---------------");
 
-        List<UserInterest> userInterests = userInterestsService.findAllUserInterests().stream().filter(ui -> {
+        List<UserInterest> userInterests = userInterestsService.findAllUserInterests().stream().filter(ui -> {          // * Search only for active user interests
             return ui.isActive();
         }).collect(Collectors.toList());
 
         userInterests.forEach(ui -> {
             try {
-                List<FoundAdvert> foundAdverts = restServicePazar3.getAdsUrls_pazar3(ui);
-                foundAdverts.addAll(restServiceReklama5.getAdsUrls_reklama5(ui));
+                List<FoundAdvert> foundAdverts = restServicePazar3.getAdsUrls_pazar3(ui);       // * Finds ads from pazar3
+                foundAdverts.addAll(restServiceReklama5.getAdsUrls_reklama5(ui));           // * Finds ads from reklama5
 
                 foundAdverts.forEach(fa -> {
-                    List<String> alreadyFoundAdUrls = foundAdvertService.findAllFoundAdverts().stream()
+                    List<FoundAdvert> alreadyFoundAds = foundAdvertService.findAllFoundAdverts();
+                    List<String> alreadyFoundAdUrls = alreadyFoundAds.stream()         // * Get all ad urls from DB
                             .map(foundAdvFromDb -> foundAdvFromDb.getUrl()).collect(Collectors.toList());
 
-                    if(!alreadyFoundAdUrls.contains(fa.getUrl()))
+                    if(!alreadyFoundAdUrls.contains(fa.getUrl())) {               // * If the new ad url is not found in already present ad urls - add it
+
+                        checkForDuplicateAds(fa, alreadyFoundAds);
+
                         foundAdvertService.createNewFoundAdvert(fa, fa.getUserInterest().getId());
+                    }
                 });
 
                 System.out.println("----- Found Ads Added");
@@ -58,7 +63,12 @@ public class RestServicesScheduler {
                 e.printStackTrace();
             }
         });
+    }
 
-
+    public void checkForDuplicateAds(FoundAdvert newFoundAd, List<FoundAdvert> alreadyFoundAds) {
+//        alreadyFoundAds.stream().forEach(alreadyFoundAd -> {
+//            if(alreadyFoundAd.getPrice().equals(newFoundAd.getPrice()) && alreadyFoundAd.getTitle().equals(newFoundAd.getTitle()))
+//
+//        });
     }
 }

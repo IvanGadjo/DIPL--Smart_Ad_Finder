@@ -53,13 +53,32 @@ public class RestServiceReklama5 {
             adImgUrl = adImgUrl.split("\\(")[1].substring(1);
             adImgUrl = adImgUrl.substring(1, adImgUrl.length()-1);      // ! Mozebi ke treba https:// pred ova
 
-//            System.out.println(secondPart);
-//            System.out.println(adTitle);
-//            System.out.println(adPrice);
-//            System.out.println(adImgUrl);
-//            System.out.println("%%%%%%%%%%%%%%%%%%%");
 
-//            foundAdvertsUrls.add("https://reklama5.mk" + secondPart);       // go vadi linkot
+
+
+
+
+
+            // ! EVE GI NOVITE STVARI
+            if(userInterest.getCategory().equals("Avtomobili")){
+                try {
+                    Document docCarAd = Jsoup.connect("https://reklama5.mk" + secondPart).get();
+
+                    Elements yearAndMileages = docCarAd.getElementsByClass("col-7");
+                    System.out.println("^^^^^^^^^^^^^^^^^^^");
+                    System.out.println(Integer.parseInt(yearAndMileages.get(2).child(0).text()));
+                    System.out.println(Integer.parseInt(yearAndMileages.get(4).child(0).text()));
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+
+
+
+
 
             FoundAdvert newFoundAd = factory.createNewFoundAdvert("https://reklama5.mk" + secondPart, false,
                     adImgUrl, adTitle, adPrice);

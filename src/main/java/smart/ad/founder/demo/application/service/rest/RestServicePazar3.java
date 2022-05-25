@@ -54,18 +54,32 @@ public class RestServicePazar3 {
 
                 String adImgUrl = el.parent().parent().parent().child(0).child(0).child(0).child(0).attr("data-src");
 
-//                System.out.println(adUrl);
-//                System.out.println(adTitle);
-//                System.out.println(adPrice);
-//                System.out.println(adImgUrl);
-//                System.out.println("%%%%%%%%%%%%%%%%%%%");
+
+
+
+
+
+                // ! EVE GI NOVITE STVARI
+                if(userInterest.getCategory().equals("Avtomobili")){
+                    String carYear = el.parent().nextElementSibling().nextElementSibling().child(0).text();
+                    String carMileage = el.parent().nextElementSibling().nextElementSibling().nextElementSibling().child(0).text();
+                    //System.out.println("^^^^^^^^^^^^^^^^^^^");
+                    //System.out.println(Integer.parseInt(carYear));
+                    //System.out.println(Integer.parseInt(carMileage.split("-")[0].replace(" ","")));
+                    //System.out.println(Integer.parseInt(carMileage.split("-")[1].replace(" ","")));
+                }
+
+
+
+
 
                 // * Ako nema pronajdeni rezultati so main keywordot vo niv - ne gi sejvnuva
                 String capitalizedMain = userInterest.getKeywords().getMainKeyword().substring(0,1).toUpperCase() +
                         userInterest.getKeywords().getMainKeyword().substring(1);
 
-                if(!adUrl.equals("") && (adUrl.contains(userInterest.getKeywords().getMainKeyword())
-                        || adUrl.contains(capitalizedMain))){
+
+                if(!adUrl.equals("") && (adTitle.contains(userInterest.getKeywords().getMainKeyword())
+                        || adTitle.contains(capitalizedMain))){
 
                     FoundAdvert newFoundAd = factory.createNewFoundAdvert("https://www.pazar3.mk" + adUrl, false,
                             adImgUrl, adTitle, adPrice);
