@@ -42,17 +42,29 @@ public class FoundAdvert {
     @Column(name = "prices")
     private String price;
 
+
+    // * Ovie 2 props ne se null ako userInterestot e od kategorija Avtomobili. Togas se pravi dodatno skrejpanje za ovie.
+    @Column(name = "car_years")
+    @Nullable
+    private Integer carYear;
+
+    @Column(name = "car_mileages")
+    @Nullable
+    private Integer carMileage;
+
     @SuppressWarnings("unused")
     public FoundAdvert() {
 
     }
 
-    public FoundAdvert(String url, boolean alreadyShownToUser, String imageUrl, String title, String price) {        // Dodaj gi u konstruktor novite props i segde kaj so se koristi konstruktorov smeni, pa update db
+    public FoundAdvert(String url, boolean alreadyShownToUser, String imageUrl, String title, String price, Integer carYear, Integer carMileage) {
         this.url = url;
         this.alreadyShownToUser = alreadyShownToUser;
         this.imageUrl = imageUrl;
         this.title = title;
         this.price = price;
+        this.carYear = carYear;
+        this.carMileage = carMileage;
     }
 
     public void setUrl(String url) {

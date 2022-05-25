@@ -65,25 +65,28 @@ public class RestServiceReklama5 {
                     Document docCarAd = Jsoup.connect("https://reklama5.mk" + secondPart).get();
 
                     Elements yearAndMileages = docCarAd.getElementsByClass("col-7");
-                    System.out.println("^^^^^^^^^^^^^^^^^^^");
-                    System.out.println(Integer.parseInt(yearAndMileages.get(2).child(0).text()));
-                    System.out.println(Integer.parseInt(yearAndMileages.get(4).child(0).text()));
+                    int carYear = Integer.parseInt(yearAndMileages.get(2).child(0).text());
+                    int carMileage = Integer.parseInt(yearAndMileages.get(4).child(0).text());
+
+                    FoundAdvert newFoundAd = factory.createNewFoundAdvert("https://reklama5.mk" + secondPart, false,
+                            adImgUrl, adTitle, adPrice, carYear, carMileage);
+                    newFoundAd.setUserInterest(userInterest);
+                    foundAds.add(newFoundAd);
+//                    System.out.println("^^^^^^^^^^^^^^^^^^^");
+//                    System.out.println(Integer.parseInt(yearAndMileages.get(2).child(0).text()));
+//                    System.out.println(Integer.parseInt(yearAndMileages.get(4).child(0).text()));
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            } else {
+
+
+                FoundAdvert newFoundAd = factory.createNewFoundAdvert("https://reklama5.mk" + secondPart, false,
+                        adImgUrl, adTitle, adPrice, null, null);
+                newFoundAd.setUserInterest(userInterest);
+                foundAds.add(newFoundAd);
             }
-
-
-
-
-
-
-
-            FoundAdvert newFoundAd = factory.createNewFoundAdvert("https://reklama5.mk" + secondPart, false,
-                    adImgUrl, adTitle, adPrice);
-            newFoundAd.setUserInterest(userInterest);
-            foundAds.add(newFoundAd);
         });
 
         return foundAds;
