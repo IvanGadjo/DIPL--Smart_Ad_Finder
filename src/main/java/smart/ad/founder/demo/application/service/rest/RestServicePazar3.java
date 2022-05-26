@@ -71,20 +71,30 @@ public class RestServicePazar3 {
 
 
                     if(userInterest.getCategory().equals("Avtomobili")){            // * Ako e category Avtomobili - izvadi i godina i kilometraza
-                        String carYearString = el.parent().nextElementSibling().nextElementSibling().child(0).text();
-                        String carMileageString = el.parent().nextElementSibling().nextElementSibling().nextElementSibling().child(0).text();
 
-                        int carYear = Integer.parseInt(carYearString);
-                        int carMileage = Integer.parseInt(carMileageString.split("-")[1].replace(" ",""));
+                        String carYearString = null;
+                        String carMileageString = null;
+                        Integer carYear = null;
+                        Integer carMileage = null;
+
+                                                                    // * Ovie 2 proverki se poso ima oglasi na pazar3 kade sto nema staveno godina/kilometraza na kolata
+                        if(el.parent().nextElementSibling().nextElementSibling() != null && !el.parent().nextElementSibling().nextElementSibling().className().equals("list-btns")){
+                            carYearString = el.parent().nextElementSibling().nextElementSibling().child(0).text();
+                            carYear = Integer.parseInt(carYearString);
+                        }
+                        if(el.parent().nextElementSibling().nextElementSibling().nextElementSibling() != null){
+                            carMileageString = el.parent().nextElementSibling().nextElementSibling().nextElementSibling().child(0).text();
+                            carMileage = Integer.parseInt(carMileageString.split("-")[1].replace(" ",""));
+                        }
 
                         FoundAdvert newFoundAd = factory.createNewFoundAdvert("https://www.pazar3.mk" + adUrl, false,
                                 adImgUrl, adTitle, adPrice, carYear, carMileage);
                         newFoundAd.setUserInterest(userInterest);
 
                         foundAds.add(newFoundAd);
-                        //System.out.println(Integer.parseInt(carYear));
-                        //System.out.println(Integer.parseInt(carMileage.split("-")[0].replace(" ","")));
-                        //System.out.println(Integer.parseInt(carMileage.split("-")[1].replace(" ","")));
+                        System.out.println(carYear);
+                        System.out.println(carMileage);
+
                     } else {
 
                         FoundAdvert newFoundAd = factory.createNewFoundAdvert("https://www.pazar3.mk" + adUrl, false,
