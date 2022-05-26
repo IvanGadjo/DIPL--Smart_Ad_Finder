@@ -43,7 +43,7 @@ public class KafkaServiceScheduler {
 
             if(!fa.getAlreadyShownToUser()) {
                 kafkaMessages.add(factory.createNewKafkaFoundAdMessage(fa.getId(), fa.getUrl(), fa.getImageUrl(), fa.getTitle(),
-                        fa.getPrice(), fa.getUserInterest().getId(), fa.getUserInterest().getUser().getUserEmail()));
+                        fa.getPrice(), fa.getUserInterest().getId(), fa.getUserInterest().getUser().getUserEmail(), fa.getCarYear(), fa.getCarMileage()));
             }
         });
 

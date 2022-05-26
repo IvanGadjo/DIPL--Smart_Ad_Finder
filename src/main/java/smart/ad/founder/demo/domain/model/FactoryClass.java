@@ -26,8 +26,8 @@ public class FactoryClass {
         return new FoundAdvert(url, alreadyShownToUser, imageUrl, title, price, carYear, carMileage);
     }
 
-    public KafkaFoundAdMessage createNewKafkaFoundAdMessage(Long foundAdId, String url, String imageUrl, String title, String price, Long userInterestId, String userEmail){
-        return new KafkaFoundAdMessage(foundAdId, url, imageUrl, title, price, userInterestId, userEmail);
+    public KafkaFoundAdMessage createNewKafkaFoundAdMessage(Long foundAdId, String url, String imageUrl, String title, String price, Long userInterestId, String userEmail, Integer carYear, Integer carMileage){
+        return new KafkaFoundAdMessage(foundAdId, url, imageUrl, title, price, userInterestId, userEmail, carYear, carMileage);
     }
 
     public UserAdvert createNewUserAdvert(String description, String title, String category, String region, String price, Boolean isActive, Byte[] image, String contactInfo){

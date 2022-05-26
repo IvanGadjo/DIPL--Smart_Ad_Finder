@@ -20,11 +20,16 @@ public class KafkaFoundAdMessage {      // * Cel ad da se prakja, isto taka i za
 
     private String userEmail;
 
+    private Integer carYear;
+
+    private Integer carMileage;
+
+
     // ? Maybe add userId also
 
     public KafkaFoundAdMessage(){}
 
-    public KafkaFoundAdMessage(Long foundAdId, String url, String imageUrl, String title, String price, Long userInterestId, String userEmail) {
+    public KafkaFoundAdMessage(Long foundAdId, String url, String imageUrl, String title, String price, Long userInterestId, String userEmail, Integer carYear, Integer carMileage) {
         this.foundAdId = foundAdId;
         this.url = url;
         this.imageUrl = imageUrl;
@@ -32,6 +37,8 @@ public class KafkaFoundAdMessage {      // * Cel ad da se prakja, isto taka i za
         this.price = price;
         this.userInterestId = userInterestId;
         this.userEmail = userEmail;
+        this.carYear = carYear;
+        this.carMileage = carMileage;
     }
 
     @Override
@@ -42,6 +49,8 @@ public class KafkaFoundAdMessage {      // * Cel ad da se prakja, isto taka i za
                 "url: " + url +
                 "title: " + title +
                 "imageUrl: " + imageUrl +
-                "price: " + price + "}";
+                "price: " + price +
+                "carYear: " + carYear +
+                "carMileage: " + carMileage + "}";
     }
 }
