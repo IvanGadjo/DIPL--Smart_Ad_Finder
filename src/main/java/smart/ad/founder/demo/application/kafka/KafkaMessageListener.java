@@ -28,9 +28,9 @@ public class KafkaMessageListener {
         System.out.println(" -------------------- LISTEN FOR KAFKA QUEUE, SEND MSG TO WEBSOCKET");
 
         // ! UNCOMMENT TO SET ALREADY SHOWN TO USER => TRUE
-//        FoundAdvert foundAd = foundAdvertService.findFoundAdvertById(message.getFoundAdId());
-//        foundAd.setAlreadyShownToUser(true);
-//        foundAdvertService.editFoundAdvert(foundAd, foundAd.getUserInterest().getId());
+        FoundAdvert foundAd = foundAdvertService.findFoundAdvertById(message.getFoundAdId());
+        foundAd.setAlreadyShownToUser(true);
+        foundAdvertService.editFoundAdvert(foundAd, foundAd.getUserInterest().getId());
 
         template.convertAndSend("/topic/group", message);   // convert the message and send it to the webSocket topic
         // template.convertAndSend("/api/kafkaMessages/topic/group", message);

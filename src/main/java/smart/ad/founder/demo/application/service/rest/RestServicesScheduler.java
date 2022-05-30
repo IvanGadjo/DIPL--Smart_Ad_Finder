@@ -50,9 +50,6 @@ public class RestServicesScheduler {
                             .map(foundAdvFromDb -> foundAdvFromDb.getUrl()).collect(Collectors.toList());
 
                     if(!alreadyFoundAdUrls.contains(fa.getUrl())) {               // * If the new ad url is not found in already present ad urls - add it
-
-                        checkForDuplicateAds(fa, alreadyFoundAds);
-
                         foundAdvertService.createNewFoundAdvert(fa, fa.getUserInterest().getId());
                     }
                 });
@@ -63,12 +60,5 @@ public class RestServicesScheduler {
                 e.printStackTrace();
             }
         });
-    }
-
-    public void checkForDuplicateAds(FoundAdvert newFoundAd, List<FoundAdvert> alreadyFoundAds) {
-//        alreadyFoundAds.stream().forEach(alreadyFoundAd -> {
-//            if(alreadyFoundAd.getPrice().equals(newFoundAd.getPrice()) && alreadyFoundAd.getTitle().equals(newFoundAd.getTitle()))
-//
-//        });
     }
 }

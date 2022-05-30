@@ -35,6 +35,7 @@ public class FoundAdvertsRepo {
         FoundAdvert old = foundAdvertRepoJPA.findById(foundAdvert.getId()).orElseThrow(RuntimeException::new);
         old.setUrl(foundAdvert.getUrl());
         old.setUserInterest(foundAdvert.getUserInterest());
+        old.setAlreadyShownToUser(foundAdvert.getAlreadyShownToUser());
         return foundAdvertRepoJPA.save(old);
     }
 

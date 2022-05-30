@@ -30,7 +30,7 @@ public class RestServicePazar3 {
 
         String url = constructPazar3Url(userInterest);
 
-        System.out.println(url);
+        // System.out.println(url);
 
         Document doc = Jsoup.connect(url).get();
 
@@ -92,8 +92,8 @@ public class RestServicePazar3 {
                         newFoundAd.setUserInterest(userInterest);
 
                         foundAds.add(newFoundAd);
-                        System.out.println(carYear);
-                        System.out.println(carMileage);
+                        // System.out.println(carYear);
+                        // System.out.println(carMileage);
 
                     } else {
 
