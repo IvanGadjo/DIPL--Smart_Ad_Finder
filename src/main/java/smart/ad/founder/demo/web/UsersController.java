@@ -29,6 +29,11 @@ public class UsersController {
         return usersService.findUserById(id);
     }
 
+    @GetMapping("/byEmail")
+    public User getUserByEmail(@PathParam("email") String email){
+        return usersService.findUserByEmail(email);
+    }
+
     // ! Not tested: dodadov da se editira i user adverts listata
     @PatchMapping("/editUser")
     public User editUser(@RequestBody User newUser){

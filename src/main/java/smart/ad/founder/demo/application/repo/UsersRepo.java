@@ -37,6 +37,10 @@ public class UsersRepo {
         }
     }
 
+    public User findByEmail(String email){
+        return userRepoJPA.findByUserEmail(email);
+    }
+
     public User createNewUser(User user){
         return userRepoJPA.save(user);
     }

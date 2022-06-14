@@ -29,23 +29,31 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
+    public User findUserByEmail(String email) {
+        return usersRepo.findByEmail(email);
+    }
+
+    @Override
     public User editUser(User newUser) {
         return usersRepo.editUser(newUser);
     }
 
     @Override
     public User createNewUser(User user) {
-//        User possibleCreatedUser = usersRepo.findById(user.getId());
-        User possibleCreatedUser = usersRepo.findById_2(user.getId());
-        if(possibleCreatedUser == null){
-            User usr = usersRepo.createNewUser(user);
-            //System.out.println("IF_____________________" + usr.getUserEmail());
-            return usr;
-        }
-        else {
-            //System.out.println("ELSE______________________" + possibleCreatedUser.getUserEmail());
-            return possibleCreatedUser;
-        }
+
+//        User possibleCreatedUser = usersRepo.findById_2(user.getId());
+//        if(possibleCreatedUser == null){
+//            User usr = usersRepo.createNewUser(user);
+//            //System.out.println("IF_____________________" + usr.getUserEmail());
+//            return usr;
+//        }
+//        else {
+//            //System.out.println("ELSE______________________" + possibleCreatedUser.getUserEmail());
+//            return possibleCreatedUser;
+//        }
+
+        User usr = usersRepo.createNewUser(user);
+        return usr;
     }
 
     @Override

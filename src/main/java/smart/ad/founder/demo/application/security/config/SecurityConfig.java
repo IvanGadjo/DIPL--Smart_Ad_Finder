@@ -9,10 +9,12 @@ import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
 import org.springframework.security.oauth2.core.OAuth2TokenValidator;
 import org.springframework.security.oauth2.jwt.*;
 
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import smart.ad.founder.demo.application.security.AudienceValidator;
 
-
-
+import java.util.List;
 
 
 @EnableWebSecurity
@@ -21,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Value("${auth0.audience}")
     private String audience;
 
-    @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
+    @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")       // * Gets value from application.properties
     private String issuer;
 
     @Override
@@ -35,9 +37,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .anyRequest()
                 .authenticated()
                 .and()
+                .cors()
+                .configurationSource(corsConfigurationSource())
+                .and()
                 .oauth2ResourceServer()
                 .jwt()
-                .decoder(jwtDecoder());;
+                .decoder(jwtDecoder());
+    }
+
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedMethods(List.of(
+                HttpMethod.GET.name(),
+                HttpMethod.PUT.name(),
+                HttpMethod.POST.name(),
+                HttpMethod.DELETE.name(),
+                HttpMethod.PATCH.name()
+        ));
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration.applyPermitDefaultValues());
+        return source;
     }
 
     JwtDecoder jwtDecoder() {
