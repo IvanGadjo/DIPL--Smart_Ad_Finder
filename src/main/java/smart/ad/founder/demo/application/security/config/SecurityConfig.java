@@ -42,7 +42,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                         "/kafka-chat/info",
                         "/kafka/**").permitAll()        // *  GET requests don't need auth
 
-//                .mvcMatchers(HttpMethod.POST, "/api/users/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -52,27 +51,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .oauth2ResourceServer()
                 .jwt()
                 .decoder(jwtDecoder());
-
-
-
-        // * Bez cors
-//        http.authorizeRequests()
-//                .mvcMatchers(HttpMethod.GET, "/api/users/**",
-//                        "/api/userInterests/**",
-//                        "/api/userAdverts/**",
-//                        "/api/foundAdverts/**",
-//                        "/api/kafkaMessages/**",
-//
-//                        "/api/kafka-chat/**",
-//                        "/kafka-chat/**",
-//                        "/kafka-chat/info",
-//                        "/kafka/**").permitAll()        // *  GET requests don't need auth
-//                .anyRequest()
-//                .authenticated()
-//                .and()
-//                .oauth2ResourceServer()
-//                .jwt()
-//                .decoder(jwtDecoder());
     }
 
     CorsConfigurationSource corsConfigurationSource() {
@@ -84,13 +62,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 HttpMethod.DELETE.name(),
                 HttpMethod.PATCH.name()
         ));
-
-
-//        configuration.setAllowedOriginPatterns(List.of(
-//                "http://localhost:3000/*"
-//        ));
-
-
 
         ArrayList<String> dozvoleniOrigins = new ArrayList<>();
 
