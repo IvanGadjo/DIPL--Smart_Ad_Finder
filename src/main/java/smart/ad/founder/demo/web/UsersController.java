@@ -50,4 +50,9 @@ public class UsersController {
         usersService.deleteUserById(id);
     }
 
+    @PostMapping("/test")
+    public void testUser(){
+        System.out.println("Projde");
+    }
+
 }

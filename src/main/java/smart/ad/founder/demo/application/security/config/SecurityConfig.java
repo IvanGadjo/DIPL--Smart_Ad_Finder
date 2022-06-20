@@ -14,7 +14,9 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import smart.ad.founder.demo.application.security.AudienceValidator;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @EnableWebSecurity
@@ -33,7 +35,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                         "/api/userInterests/**",
                         "/api/userAdverts/**",
                         "/api/foundAdverts/**",
-                        "/api/kafkaMessages/**").permitAll()        // *  GET requests don't need auth
+                        "/api/kafkaMessages/**",
+
+                        "/api/kafka-chat/**",
+                        "/kafka-chat/**",
+                        "/kafka-chat/info",
+                        "/kafka/**").permitAll()        // *  GET requests don't need auth
+
+//                .mvcMatchers(HttpMethod.POST, "/api/users/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -43,6 +52,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .oauth2ResourceServer()
                 .jwt()
                 .decoder(jwtDecoder());
+
+
+
+        // * Bez cors
+//        http.authorizeRequests()
+//                .mvcMatchers(HttpMethod.GET, "/api/users/**",
+//                        "/api/userInterests/**",
+//                        "/api/userAdverts/**",
+//                        "/api/foundAdverts/**",
+//                        "/api/kafkaMessages/**",
+//
+//                        "/api/kafka-chat/**",
+//                        "/kafka-chat/**",
+//                        "/kafka-chat/info",
+//                        "/kafka/**").permitAll()        // *  GET requests don't need auth
+//                .anyRequest()
+//                .authenticated()
+//                .and()
+//                .oauth2ResourceServer()
+//                .jwt()
+//                .decoder(jwtDecoder());
     }
 
     CorsConfigurationSource corsConfigurationSource() {
@@ -55,8 +85,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 HttpMethod.PATCH.name()
         ));
 
+
+//        configuration.setAllowedOriginPatterns(List.of(
+//                "http://localhost:3000/*"
+//        ));
+
+
+
+        ArrayList<String> dozvoleniOrigins = new ArrayList<>();
+
+        dozvoleniOrigins.add("http://localhost:3000");
+        configuration.setAllowedOrigins(dozvoleniOrigins);
+
+        configuration.setAllowCredentials(true);
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration.applyPermitDefaultValues());
+
+
+        // * Printa dozvoleni origins
+        configuration.getAllowedOrigins().stream().collect(Collectors.toList()).forEach(orgn -> {
+            System.out.println(orgn);
+        });
+
         return source;
     }
 
