@@ -52,14 +52,13 @@ public class RestServicePazar3 {
 
             if(!adTitle.equals("")){        // * Kako posleden element se fakja nekoj koj nema title - i potoa pagja na vadenje adImgUrl zatoa vaka mora
 
-                String adImgUrl = el.parent().parent().parent().child(0).child(0).child(0).child(0).attr("data-src");
+                String adImgUrl = "";
+                System.out.println(el.parent().parent().parent().child(0).child(0).child(0).child(0).nextElementSibling() == null);
+                if(el.parent().parent().parent().child(0).child(0).child(0).child(0).nextElementSibling() != null)
+                   adImgUrl = el.parent().parent().parent().child(0).child(0).child(0).child(0).nextElementSibling().attr("data-src");
 
-
-
-
-
-
-
+//                System.out.println(adUrl);
+//                System.out.println(el.parent().parent().parent().child(0).child(0).child(0).child(0).nextElementSibling());
 
                 // * Ako nema pronajdeni rezultati so main keywordot vo niv - ne gi sejvnuva
                 String capitalizedMain = userInterest.getKeywords().getMainKeyword().substring(0,1).toUpperCase() +
